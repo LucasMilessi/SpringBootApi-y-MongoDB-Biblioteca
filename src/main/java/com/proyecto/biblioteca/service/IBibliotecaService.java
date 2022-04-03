@@ -13,4 +13,16 @@ public interface IBibliotecaService {
     Mono<Recurso> actualizarRecurso(String recursoId, Recurso recurso);
 
     Mono<Recurso> eliminarRecurso(String recursoId);
+
+    Mono<Recurso> recursoPorId(String recursoId);
+
+    Mono<String> consultarDisponibilidadDeRecurso(String recursoId);
+
+    Mono<String> validarDisponibilidadDeRecurso(Mono<Recurso> recurso);
+
+    Mono<String> prestarRecursoDisponible(String recursoId);
+
+    Flux<Recurso> recomendarPorTipoyArea(String tipo, String area);
+
+    Mono<Object> devolverRecursoPrestado(String recursoId);
 }

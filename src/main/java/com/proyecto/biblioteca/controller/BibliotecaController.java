@@ -48,4 +48,35 @@ public class BibliotecaController {
 
     }
 
+    @GetMapping(value = "/buscarRecursoPorId/{id}")
+    private Mono<Recurso> buscarRecursoPorId(@PathVariable("id") String recursoId) {
+        return this.bibliotecaService.recursoPorId(recursoId);
+    }
+
+
+    @GetMapping(value = "/consultarDisponibilidad/{id}")
+    public Mono<String> consultarDisponibilidad(@PathVariable("id") String recursoId){
+        var isDisponible = bibliotecaService.consultarDisponibilidadDeRecurso(recursoId);
+        if(isDisponible == null){
+            return isDisponible;
+        }
+        return isDisponible;
+    }
+
+    @PutMapping("/prestarRecurso/{id}")
+    public Mono prestarRecurso(@PathVariable("id") String recursoId){
+        return bibliotecaService.prestarRecursoDisponible(recursoId);
+    }
+
+    @GetMapping(value = "recomendarTipoArea/{tipo}/{area}")
+    private Flux<Recurso> recomendarTipoArea(@PathVariable("tipo") String tipo, @PathVariable("area") String area) {
+        return this.bibliotecaService.recomendarPorTipoyArea(tipo,area);
+    }
+
+    @PutMapping("/devolver/{id}")
+    public Mono devolverRecurso(@PathVariable("id") String id){
+        return bibliotecaService.devolverRecursoPrestado(id);
+    }
+
+
 }
